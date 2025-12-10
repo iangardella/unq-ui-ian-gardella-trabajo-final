@@ -70,6 +70,20 @@
     pointer-events: none; 
 }
 
+.disabled-options li {
+    opacity: 0.5;
+    background-color: #e0e0e0;
+    border-color: #ccc;
+    transform: scale(0.98);
+    transition: all 0.3s ease; 
+}
+
+.disabled-options li.correct,
+.disabled-options li.incorrect {
+    opacity: 1 !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 button:disabled {
     background-color: #ccc;
