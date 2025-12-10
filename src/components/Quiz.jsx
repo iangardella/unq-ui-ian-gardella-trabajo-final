@@ -11,6 +11,7 @@ export const Quiz = () => {
     const [difficulties, setDifficulties] = useState([]);
     const [gameStarted, setGameStarted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [verifying, setVerifying] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [answered, setAnswered] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -49,7 +50,7 @@ export const Quiz = () => {
     const handleAnswer = (optionKey) => {
         if (answered) return;
 
-        setLoading(true);
+        setVerifying(true);
         const currentQ = questions[currentQuestionIndex];
 
         getAnswers(currentQ.id, optionKey)
@@ -64,7 +65,7 @@ export const Quiz = () => {
                 }
             })
             .catch(err => console.error(err))
-            .finally(() => setLoading(false));
+            .finally(() => setVerifying(false));
     };
 
     const handleNextQuestion = () => {
@@ -118,7 +119,7 @@ export const Quiz = () => {
     if (!gameStarted) {
         return (
             <div className='container'>
-                <h1>Preguntados</h1>
+                <h1>Quiz App</h1>
                 <hr />
                 <h2>Selecciona una dificultad</h2>
                 <ul>
@@ -138,7 +139,7 @@ export const Quiz = () => {
 
     return (
         <div className='container'>
-            {loading && (
+            {(loading || verifying) && (
                 <div className="loading-overlay">
                     <div className="spinner"></div>
                 </div>
