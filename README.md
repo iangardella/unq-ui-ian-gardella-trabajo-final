@@ -20,5 +20,5 @@ npm install
 ```bash
 npm run dev
 ```
-Una vez iniciado el serivodr ingresa al url dada y al port indicado por pagina web
+Una vez iniciado el servidor ingresa al url dada y al port indicado por pagina web
 
