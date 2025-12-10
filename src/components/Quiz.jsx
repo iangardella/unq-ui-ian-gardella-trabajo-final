@@ -21,9 +21,8 @@ export const Quiz = () => {
         setLoading(true);
         setRightQuestions(0); 
         getDifficulties()
-            .then(res => res.json())
-            .then(data => {
-                setDifficulties(data);
+            .then(res => {
+                setDifficulties(res.data);
                 setLoading(false);
             })
             .catch(err => {
@@ -39,9 +38,8 @@ export const Quiz = () => {
         setRightQuestions(0); 
 
         getQuestions(selectedDifficulty)
-            .then(res => res.json())
-            .then(data => {
-                setQuestions(data);
+            .then(res => {
+                setQuestions(res.data);
                 setGameStarted(true);
             })
             .catch(err => console.error(err))
@@ -55,8 +53,9 @@ export const Quiz = () => {
         const currentQ = questions[currentQuestionIndex];
 
         getAnswers(currentQ.id, optionKey)
-            .then(res => res.json())
-            .then(data => {
+            .then(res => {
+                const data = res.data;
+
                 setAnswerResult(data.answer);
                 setSelectedOption(optionKey);
                 setAnswered(true);
@@ -99,7 +98,6 @@ export const Quiz = () => {
     };
 
 
-    if (loading) return <div className='container'><h1>Cargando...</h1></div>;
     if (gameOver) {
         return (
             <div className='container'>
@@ -140,6 +138,11 @@ export const Quiz = () => {
 
     return (
         <div className='container'>
+            {loading && (
+                <div className="loading-overlay">
+                    <div className="spinner"></div>
+                </div>
+            )}
             <h1>Quiz - {difficulty.toUpperCase()}</h1>
             <hr />
             <h2>{currentQuestionData.question}</h2>
